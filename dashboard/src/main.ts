@@ -1,12 +1,34 @@
 import App from "./App.vue";
 import { createClient, clientProviderKey, api } from "./client";
 import "./styles/main.scss";
+import messages from "@intlify/vite-plugin-vue-i18n/messages";
 import humanizeDuration from "humanize-duration";
 import moment from "moment";
 import { createPinia } from "pinia";
 import { createApp } from "vue";
+import { createI18n } from "vue-i18n";
 import { createRouter, createWebHistory } from "vue-router";
 import routes from "~pages";
+
+const getNavigatorLanguage = () => {
+  if (navigator.languages && navigator.languages.length) {
+    return navigator.languages[0];
+  } else {
+    return navigator.language;
+  }
+};
+
+const i18n = createI18n({
+  legacy: false,
+  locale: getNavigatorLanguage(),
+  fallbackLocale: {
+    default: ["en"],
+  },
+  formatFallbackMessages: true,
+  //missingWarn: false,
+  //fallbackWarn: false,
+  messages,
+});
 
 const router = createRouter({
   history: createWebHistory("/"),
@@ -20,6 +42,7 @@ const pinia = createPinia();
 const app = createApp(App);
 app.use(router);
 app.use(pinia);
+app.use(i18n);
 app.mount("#app");
 app.provide(clientProviderKey, client);
 

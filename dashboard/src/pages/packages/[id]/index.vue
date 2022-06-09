@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { usePackageStore } from "../../../stores/package";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n();
 const packageStore = usePackageStore();
 </script>
 
@@ -8,13 +10,13 @@ const packageStore = usePackageStore();
   <div v-if="packageStore.current">
     <div class="row mt-3">
       <div class="col">
-        <h2>AIP creation details</h2>
+        <h2>{{ t("AIP creation details") }}</h2>
         <dl>
-          <dt>Name</dt>
+          <dt>{{ t("Name") }}</dt>
           <dd>{{ packageStore.current.name }}</dd>
-          <dt>AIP UUID</dt>
+          <dt>{{ t("AIP UUID") }}</dt>
           <dd>{{ packageStore.current.aipId }}</dd>
-          <dt>Workflow status</dt>
+          <dt>{{ t("Workflow status") }}</dt>
           <dd>
             <span class="badge text-bg-warning"
               >TODO: {{ packageStore.current.status }}</span

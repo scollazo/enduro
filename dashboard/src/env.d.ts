@@ -1,6 +1,7 @@
 /// <reference types="vite/client" />
 /// <reference types="vite-plugin-pages/client" />
 /// <reference types="vue/ref-macros" />
+/// <reference types="@intlify/vite-plugin-vue-i18n/client" />
 
 declare module "*.vue" {
   import type { DefineComponent } from "vue";

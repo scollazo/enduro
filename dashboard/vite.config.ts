@@ -1,3 +1,4 @@
+import VueI18n from "@intlify/vite-plugin-vue-i18n";
 import vue from "@vitejs/plugin-vue";
 import * as path from "path";
 import { defineConfig } from "vite";
@@ -5,7 +6,15 @@ import Pages from "vite-plugin-pages";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue({ reactivityTransform: true }), Pages()],
+  plugins: [
+    vue({ reactivityTransform: true }),
+    Pages(),
+    VueI18n({
+      runtimeOnly: true,
+      compositionOnly: true,
+      include: [path.resolve(__dirname, "locales/**")],
+    }),
+  ],
   server: {
     proxy: {
       "/api": {

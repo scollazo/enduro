@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import { useI18n } from "vue-i18n";
+
+const { t } = useI18n();
+</script>
 <template>
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
@@ -11,7 +16,7 @@
               class="nav-link"
               active-class="active"
               :to="{ name: 'packages' }"
-              >Packages</router-link
+              >{{ t("Packages") }}</router-link
             >
           </li>
         </ul>

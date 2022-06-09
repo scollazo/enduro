@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { usePackageStore } from "../../stores/package";
+import { useI18n } from "vue-i18n";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
 const packageStore = usePackageStore();
+const { t } = useI18n();
 
 packageStore.fetchCurrent(route.params.id.toString());
 </script>
@@ -15,7 +17,9 @@ packageStore.fetchCurrent(route.params.id.toString());
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
-              <router-link :to="{ name: 'packages' }">Packages</router-link>
+              <router-link :to="{ name: 'packages' }">{{
+                t("Packages")
+              }}</router-link>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
               {{ packageStore.current.name }}
@@ -33,7 +37,7 @@ packageStore.fetchCurrent(route.params.id.toString());
                 name: 'packages-id',
                 params: { id: packageStore.current.id },
               }"
-              >Overview</router-link
+              >{{ t("Overview") }}</router-link
             >
           </li>
           <li class="nav-item">
@@ -44,7 +48,7 @@ packageStore.fetchCurrent(route.params.id.toString());
                 name: 'packages-id-workflow',
                 params: { id: packageStore.current.id },
               }"
-              >Workflow</router-link
+              >{{ t("Workflow") }}</router-link
             >
           </li>
         </ul>
