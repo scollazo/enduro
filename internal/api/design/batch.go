@@ -12,10 +12,11 @@ var _ = Service("batch", func() {
 	Method("submit", func() {
 		Description("Submit a new batch")
 		Payload(func() {
-			Attribute("path", String)
-			Attribute("completed_dir", String)
-			Attribute("retention_period", String)
-			Required("path")
+			Attribute("batch_location", String)
+			Attribute("manifest_location", String)
+			Attribute("transfer_type", String)
+			Attribute("workflow", String)
+			Required("batch_location","manifest_location")
 		})
 		Result(BatchResult)
 		Error("not_available")
@@ -46,9 +47,11 @@ var _ = Service("batch", func() {
 })
 
 var BatchResult = Type("BatchResult", func() {
-	Attribute("workflow_id", String)
-	Attribute("run_id", String)
-	Required("workflow_id", "run_id")
+	Attribute("batch_uuid", String)
+	Attribute("batch_name", String)
+	Attribute("batch_run_id", String)
+	Attribute("batch_status", String)
+	Required("batch_uuid","batch_name","batch_run_id","batch_status")
 })
 
 var BatchStatusResult = Type("BatchStatusResult", func() {
